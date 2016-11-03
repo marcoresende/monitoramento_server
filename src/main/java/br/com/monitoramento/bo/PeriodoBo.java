@@ -1,11 +1,9 @@
 package br.com.monitoramento.bo;
 
-import javax.persistence.*;
+/*import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by Marcolino on 31/10/2016.
- */
+
 @Entity
 @Table(name = "PER_PERIODO")
 public class PeriodoBo implements Serializable{
@@ -45,3 +43,4 @@ public class PeriodoBo implements Serializable{
         this.type = type;
     }
 }
+*/

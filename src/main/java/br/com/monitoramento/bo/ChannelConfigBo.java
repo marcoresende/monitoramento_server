@@ -1,11 +1,9 @@
-package br.com.monitoramento.bo;
+/*package br.com.monitoramento.bo;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by marcoresende on 31/10/2016.
- */
+
 @Entity
 @Table(name = "CHN_CONFIG")
 public class ChannelConfigBo implements Serializable {
@@ -58,3 +56,4 @@ public class ChannelConfigBo implements Serializable {
         this.maxValue = maxValue;
     }
 }
+*/

@@ -5,26 +5,33 @@ package br.com.monitoramento.enums;
  */
 public enum PeriodEnum {
 
-    MINUTO(1, "minuto"),
-    HORA(2, "hora"),
-    DIA(3, "dia"),
-    SEMANA(4, "semana"),
-    MES(5, "mes");
+    MINUTO(1, "&minutes=1"),
+    HORA(2, "&minutes=60&sum=60"),
+    DIA(3, "&days=1&sum=daily"),
+    SEMANA(4, "&days=7&sum=daily"),
+    MES(5, "&days=30&sum=daily");
 
     private final Integer id;
-    private final String desc;
+    private final String param;
 
-    PeriodEnum(Integer id, String desc){
+    PeriodEnum(Integer id, String param){
         this.id = id;
-        this.desc = desc;
+        this.param = param;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public java.lang.String getDesc() {
-        return desc;
+    public String getParam() {
+        return param;
+    }
+
+    public static PeriodEnum getById(Integer id) {
+        for(PeriodEnum e : values()) {
+            if(e.id.equals(id)) return e;
+        }
+        return null;
     }
 
 }

@@ -1,13 +1,11 @@
-package br.com.monitoramento.bo;
+/*package br.com.monitoramento.bo;
 
 import com.sun.javafx.beans.IDProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by marcoresende on 31/10/2016.
- */
+
 @Entity
 @Table(name = "USU_USUARIO")
 public class UserBo implements Serializable{
@@ -65,3 +63,4 @@ public class UserBo implements Serializable{
         this.appKey = appKey;
     }
 }
+*/
