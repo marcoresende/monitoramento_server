@@ -11,7 +11,7 @@ import br.com.monitoramento.controller.MonitorServiceController;
 @EnableScheduling
 @ComponentScan({ "br.com.monitoramento.integration.task" })
 public class BootApp {
-
+	
 	public static void main(String[] args) throws Exception {
         SpringApplication.run(new Object[] { BootApp.class, MonitorServiceController.class }, args);
     }

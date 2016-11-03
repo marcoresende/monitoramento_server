@@ -26,7 +26,7 @@ public class UserDomain {
 	
 	public void save(CreateUserRequest user) throws FalhaException{
 		if(mapUsers.containsKey(user.getLogin())){
-			throw new FalhaException("Usu√°rio j√° cadastrado!");
+			throw new FalhaException("Usu·rio j· cadastrado!");
 		}
 		
 		mapUsers.put(user.getLogin(), user);
@@ -36,7 +36,7 @@ public class UserDomain {
 		
 		if(!mapUsers.containsKey(login.getLogin()) 
 				|| !mapUsers.get(login.getLogin()).getPassword().equals(login.getPassword())){
-			throw new FalhaException("Usu√°rio ou senha inv√°lidos!");
+			throw new FalhaException("Usu·rio ou senha inv·lidos!");
 		}
 	}
 

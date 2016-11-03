@@ -27,7 +27,7 @@ public class ScheduleIntegration {
 	 * Verifica a cada determinado periodo(fixedRate) se o consumo ultrapassou o
 	 * limite definido por usuario
 	 */
-	@Scheduled(initialDelay = 3000, fixedRate = 50000)
+	@Scheduled(initialDelay = 3000000, fixedRate = 50000)
 	public void checkFlow() {
 		try {
 			send();
