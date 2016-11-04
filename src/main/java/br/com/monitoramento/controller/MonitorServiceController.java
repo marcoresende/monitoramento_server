@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -98,12 +100,12 @@ public class MonitorServiceController {
     
     @RequestMapping(method=RequestMethod.GET, path="config")
 	@ResponseBody
-	public ResponseEntity<FindResponse> getConfig(@RequestBody String user) throws FalhaException{
+	public ResponseEntity<FindResponse> getConfig() throws FalhaException{
     	UserDomain domain = new UserDomain();
-    	if(user == null || user.isEmpty()){
-            FindResponse response = new FindResponse(HttpStatus.BAD_REQUEST.value(), "Campos obrigatórios!");
-            return (ResponseEntity<FindResponse>) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
+//    	if(user == null || user.isEmpty()){
+//            FindResponse response = new FindResponse(HttpStatus.BAD_REQUEST.value(), "Campos obrigatórios!");
+//            return (ResponseEntity<FindResponse>) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+//        }
     	
     	ConfigRequest config = UserDomain.getConfig();
 		String message = !(config == null) ? " resultado encontrado." : "Pesquisa não retornou nenhum resultado!";
