@@ -43,6 +43,6 @@ public class ScheduleIntegrationAgg {
 
             }
 		}
-		new NotificacaoUtil().sendPushNotification("Alerta de consumo", "O consumo mensal ultrapassou o limite configurado");
+		//new NotificacaoUtil().sendPushNotification("Alerta de consumo", "O consumo mensal ultrapassou o limite configurado");
 	}
 }

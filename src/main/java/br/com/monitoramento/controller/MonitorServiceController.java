@@ -1,18 +1,27 @@
 package br.com.monitoramento.controller;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.monitoramento.domain.UserDomain;
 import br.com.monitoramento.exception.FalhaException;
 import br.com.monitoramento.request.ConfigRequest;
 import br.com.monitoramento.request.CreateUserRequest;
 import br.com.monitoramento.request.LoginRequest;
 import br.com.monitoramento.response.BaseResponse;
-import org.apache.log4j.Logger;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.lang.reflect.Field;
+import br.com.monitoramento.response.FindResponse;
 
 @RestController
 @EnableAutoConfiguration
@@ -65,10 +74,30 @@ public class MonitorServiceController {
 		BaseResponse response = new BaseResponse(HttpStatus.OK.value(), "Usu√°rio autenticado com sucesso!");
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
-
+    
+    @RequestMapping(method=RequestMethod.GET, path="config")
+	@ResponseBody
+	public ResponseEntity<FindResponse> listConfigs(@RequestBody String user) throws FalhaException{
+    	UserDomain domain = new UserDomain();
+    	if(user == null || user.isEmpty()){
+            FindResponse response = new FindResponse(HttpStatus.BAD_REQUEST.value(), "Campos obrigatÛrios!");
+            return (ResponseEntity<FindResponse>) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    	
+		List<ConfigRequest> list = domain.getConfigs(user);
+		String message = !list.isEmpty() ? list.size() + " resultado(s) encontrado(s)." : "Pesquisa n„o retornou nenhum resultado!";
+		
+		FindResponse response = new FindResponse();
+		response.setCode(HttpStatus.OK.value());
+		response.setResult(list);
+		response.setMessage(message);
+		
+		return ResponseEntity.ok().body(response);
+	}
+    
     @RequestMapping(method = RequestMethod.POST, path="config")
     @ResponseBody
-    public ResponseEntity<BaseResponse> login(@RequestBody ConfigRequest request) throws FalhaException {
+    public ResponseEntity<BaseResponse> config(@RequestBody ConfigRequest request) throws FalhaException {
         if(!isValidRequest(request)){
             BaseResponse response = new BaseResponse(HttpStatus.BAD_REQUEST.value(), "Campos obrigat√≥rios!");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
