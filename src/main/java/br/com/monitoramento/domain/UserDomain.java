@@ -18,6 +18,10 @@ public class UserDomain {
 	public static ConfigRequest getConfig(){
 		return UserDomain.config;
 	}
+
+    public static void setConfig(ConfigRequest config){
+        UserDomain.config = config;
+    }
 	
 	/*
 	public ConfigRequest getConfig(String user){

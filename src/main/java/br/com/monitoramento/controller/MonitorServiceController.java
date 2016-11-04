@@ -129,7 +129,7 @@ public class MonitorServiceController {
         UserDomain domain = new UserDomain();
         domain.config(request);
 
-        BaseResponse response = new BaseResponse(HttpStatus.OK.value(), "ConfiguraÃ§Ãµes alteradas com sucesso!");
+        BaseResponse response = new BaseResponse(HttpStatus.OK.value(), "Configurações alteradas com sucesso!");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     
