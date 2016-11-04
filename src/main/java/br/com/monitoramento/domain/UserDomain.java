@@ -1,8 +1,6 @@
 package br.com.monitoramento.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import br.com.monitoramento.exception.FalhaException;
@@ -14,8 +12,20 @@ public class UserDomain {
 	
 	//TODO: Criar persistencia
 	public static Map<String, CreateUserRequest> mapUsers = new HashMap<String, CreateUserRequest>();
-	private static Map<String, List<ConfigRequest>> mapConfig = new HashMap<String, List<ConfigRequest>>();
-
+//	public static Map<String, ConfigRequest> mapConfig = new HashMap<String, ConfigRequest>();
+	private static ConfigRequest config = null;
+	
+	public static ConfigRequest getConfig(){
+		return UserDomain.config;
+	}
+	
+	/*
+	public ConfigRequest getConfig(String user){
+		if(UserDomain.mapConfig == null){
+			UserDomain.mapConfig =  new HashMap<String, ConfigRequest>();
+		}
+		return UserDomain.mapConfig.get(user);
+	}
 	public static List<ConfigRequest> getConfig(String user){
 		if(UserDomain.mapConfig == null){
 			UserDomain.mapConfig =  new HashMap<String, List<ConfigRequest>>();
@@ -25,7 +35,7 @@ public class UserDomain {
 //		}
 		return UserDomain.mapConfig.get(user);
 	}
-	
+	*/
 	public void save(CreateUserRequest user) throws FalhaException{
 		if(mapUsers.containsKey(user.getLogin())){
 			throw new FalhaException("Usuário já cadastrado!");
@@ -43,10 +53,18 @@ public class UserDomain {
 	}
 
 	public void config(ConfigRequest config){
+		UserDomain.config = config;
+//		if(mapConfig.containsKey(config.getLogin())){
+//			mapConfig.put(config.getLogin(), config);
+//		}
+	}
+
+/*
+	public void config(ConfigRequest config){
 		
 		if(mapConfig.containsKey(config.getLogin())){
 			
-			List<ConfigRequest> configs = mapConfig.get(config.getLogin()); 
+			ConfigRequest configs = mapConfig.get(config.getLogin()); 
 			if (config.getPeriod().intValue() > 0 && config.getPeriod().intValue() <= 5){
 				if (configs == null){
 					configs = new ArrayList<ConfigRequest>(5);
@@ -56,11 +74,7 @@ public class UserDomain {
 			}
 		}
 	}
-	
-	public List<ConfigRequest> getConfigs(String user){
-		return mapConfig.get(user);
-	}
-	
+*/	
 	public CreateUserRequest get(String user){
 		return mapUsers.get(user);
 	}

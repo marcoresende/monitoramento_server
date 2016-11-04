@@ -74,7 +74,7 @@ public class MonitorServiceController {
 		BaseResponse response = new BaseResponse(HttpStatus.OK.value(), "UsuÃ¡rio autenticado com sucesso!");
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
-    
+    /*
     @RequestMapping(method=RequestMethod.GET, path="config")
 	@ResponseBody
 	public ResponseEntity<FindResponse> listConfigs(@RequestBody String user) throws FalhaException{
@@ -94,12 +94,33 @@ public class MonitorServiceController {
 		
 		return ResponseEntity.ok().body(response);
 	}
+	*/
+    
+    @RequestMapping(method=RequestMethod.GET, path="config")
+	@ResponseBody
+	public ResponseEntity<FindResponse> getConfig(@RequestBody String user) throws FalhaException{
+    	UserDomain domain = new UserDomain();
+    	if(user == null || user.isEmpty()){
+            FindResponse response = new FindResponse(HttpStatus.BAD_REQUEST.value(), "Campos obrigatórios!");
+            return (ResponseEntity<FindResponse>) ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    	
+    	ConfigRequest config = UserDomain.getConfig();
+		String message = !(config == null) ? " resultado encontrado." : "Pesquisa não retornou nenhum resultado!";
+		
+		FindResponse response = new FindResponse();
+		response.setCode(HttpStatus.OK.value());
+		response.setResult(config);
+		response.setMessage(message);
+		
+		return ResponseEntity.ok().body(response);
+    }
     
     @RequestMapping(method = RequestMethod.POST, path="config")
     @ResponseBody
     public ResponseEntity<BaseResponse> config(@RequestBody ConfigRequest request) throws FalhaException {
         if(!isValidRequest(request)){
-            BaseResponse response = new BaseResponse(HttpStatus.BAD_REQUEST.value(), "Campos obrigatÃ³rios!");
+            BaseResponse response = new BaseResponse(HttpStatus.BAD_REQUEST.value(), "Campos obrigatórios!");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 

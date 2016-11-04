@@ -46,7 +46,7 @@ public class ScheduleIntegration {
 				ChannelResponse.class);
 
 		if(response != null && isAboveLimit(response.getFeeds())){
-            logger.debug("Enviando notificação push...");
+            logger.debug("Enviando notificacao push...");
 			sendNotification();
 		}
 	}
@@ -74,7 +74,8 @@ public class ScheduleIntegration {
 
     private String getPeriodUrlParameter(){
         //TODO: remover
-        Integer period = UserDomain.getConfig().getPeriod();
+    	
+    	Integer period = UserDomain.getConfig().getPeriod();
 
         PeriodEnum periodEnum = PeriodEnum.getById(period);
         return periodEnum != null ? periodEnum.getParam() : DEFAULT_PARAM;
